@@ -8,16 +8,8 @@ from pydantic_settings import BaseSettings
 class DatabaseSettings(BaseSettings):
     """Database connection settings."""
     
-    host: str = Field(default="localhost", env="DB_HOST")
-    port: int = Field(default=5432, env="DB_PORT")
-    name: str = Field(default="sentinel_lite", env="DB_NAME")
-    user: str = Field(default="postgres", env="DB_USER")
-    password: str = Field(default="postgres", env="DB_PASSWORD")
-    
-    @property
-    def url(self) -> str:
-        """Get database connection URL."""
-        return f"postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.name}"
+    # For now, use SQLite for development
+    url: str = Field(default="sqlite:///sentinel_lite.db", env="DATABASE_URL")
 
 
 class APISettings(BaseSettings):
